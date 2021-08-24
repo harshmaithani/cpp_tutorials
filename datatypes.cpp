@@ -14,7 +14,15 @@ int main()
     float   e       = 6.5f;
     char    f       = 'f';
     char    g[]     = {'h','a','r','s','h'};
-    
+
+    auto        ab  = 9.8f;     // New formats
+    wchar_t     ac;
+    char16_t    ad;
+    std::size_t ae;
+
+    float   ba = (float) a;     // C like cast
+    float   bb = float (a);     // C++ like cast
+
     std::cout << a << std::endl;
     std::cout << b << std::endl;
     std::cout << c << std::endl;

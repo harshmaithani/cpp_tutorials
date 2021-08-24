@@ -10,6 +10,8 @@ add_executable(vector vector.cpp)
 add_executable(characters characters.cpp)
 add_executable(strings strings.cpp)
 add_executable(classes classes.cpp)
+add_executable(pointers pointers.cpp)
+add_executable(conditionals conditionals.cpp)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})

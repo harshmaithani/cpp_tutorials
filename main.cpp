@@ -12,5 +12,7 @@ int main(int argc, char** argv)
     // Classes
     // Vectors
     // Strings
+    // Functions
+    // Pointers
     // Exceptions
 }
