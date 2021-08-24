@@ -32,20 +32,33 @@ int main(int, char**) {
     x3.assign(5,1);                             // Assigns new value
 
     // Iterate
+    std::cout <<    "Iterator method" << std::endl;
+
     auto it = x2.begin();
     for (auto it = x2.begin(); it != x2.end(); it++)
     {
         std::cout << *it << std::endl;
     }
 
-    std::cout <<    "------------" << std::endl;
+    std::cout <<    "Index method" << std::endl;
 
     for (int i = 0; i < x2.size(); i++)
     {
         std::cout << x2[i] << std::endl;
     }
-    
-    std::cout <<    "------------" << std::endl;
+
+    std::cout <<    "Iterator method" << std::endl;
+
+    for (auto i = x5.begin(); i < x5.end(); i++)
+    {
+        for (auto j = i->begin(); j < i->end() ; j++)
+        {
+            std::cout << *j << " ";
+        }
+        std::cout << std::endl;
+    }
+
+    std::cout <<    "Index method" << std::endl;
 
     for (int i = 0; i < x5.size(); i++)
     {

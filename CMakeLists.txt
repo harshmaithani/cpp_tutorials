@@ -12,6 +12,8 @@ add_executable(strings strings.cpp)
 add_executable(classes classes.cpp)
 add_executable(pointers pointers.cpp)
 add_executable(conditionals conditionals.cpp)
+add_executable(functions functions.cpp)
+add_executable(headers headers.cpp)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})

@@ -12,20 +12,21 @@ int main()
         std::cout << x[i] << std::endl;
     }
 
-    for (int j : x)
+    for (int j : x)                         // Range based loop
     {
         std::cout << x[j] << std::endl;
     }
 
-    std::vector<std::vector<int>> y{{1,2},
+    std::vector<std::vector<int>> vec{{1,2},
                                     {3,4},
                                     {5,6}};
-    for (auto m:y)
+
+    for (auto i = vec.begin();i < vec.end();i++)
     {
-        for (auto n:m)
+        for (auto j = i->begin(); j < i->end(); j++)
         {
-            std::cout << n << " ";
+            std::cout << *j << " ";
         }
-        std::cout << "\n";
+        std::cout << std::endl;
     }
 }
