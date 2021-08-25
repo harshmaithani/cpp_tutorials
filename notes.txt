@@ -1,0 +1,47 @@
+1.  Protected Keywords
+
+2.  Primitive datatypes                             int,float
+
+3.  User defined                                    struct
+
+4.  Identifiers                                     variables and function names
+
+5.  Access specifiers                               public, private, protected. Default is public for struct, private for class.                 
+
+6.  Accessor (or getter) functions
+
+7.  Mutator (or setter) functions
+
+8.  Encapsulation                                   grouping properties together in a class
+
+9.  Abstraction                                     only interface has to be known, hiding the details of how we work with data
+
+10. Inheritance                                     parent-child classes
+
+11. Polymorphism                                    In the context of object-oriented programming, polymorphism) describes a paradigm in which a function may behave differently depending on how it is called. 
+                                                    In particular, the function will perform differently based on its inputs.
+                                                    Polymorphism can be achieved in two ways in C++: overloading and overriding
+
+12. Public inheritance:                             the public and protected members of the base class listed after the
+                                                    specifier keep their member access in the derived class
+
+13. Protected inheritance:                          the public and protected members of the base class listed after the
+                                                    specifier are protected members of the derived class
+
+14. Private inheritance:                            the public and protected members of the base class listed after the
+                                                    specifier are private members of the derived class
+
+15. Friend class                                    friend class can access private members of its friend                                          
+
+16. Virtual functions                               
+
+17. Pure virtual functions 
+
+18. Override                                        "Overriding" a function occurs when a derived class defines the
+                                                    implementation of a virtual function that it inherits from a base class.
+                                                    It is possible, but not required, to specify a function declaration as override.
+
+19. Lambda functions                                []() {}; // defines a lambda with no captures, no parameters, and no return type
+
+20. Functors                                        Class objects working as functions by overloading the () operator. They can retain the
+                                                    state by using the constructor of the class.

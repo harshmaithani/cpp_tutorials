@@ -29,13 +29,26 @@ int main()
 {
     std::cout << "Datatypes" << std::endl;
 
-    int     a       = 5;
-    int     b[]     = {0,1,2,3};
+                                        // L - values   - value that has an address
+                                        // R - values   - an expression that is not an L-value
+
+    int     a       = 5;                // Copy initialization
+    int     a1( 5 );                    // Direct initialization
+    int     a2{ 5 };                    // Brace initialization. From C++11 onwards    
+    int     b[]     = {0,1,2,3};        // Arrays
+    int*    b1;                         // Pointer is equivalent to array
+            b1      = b;                // int* b1 = &b[0]
     int     c[3]    = {0,1,2};
     double  d       = 6.5;
-    float   e       = 6.5f;
+    float   e       = 6.5f;             // floats need an explicit suffix f else it will be considered double
     char    f       = 'f';
     char    g[]     = {'h','a','r','s','h'};
+
+    const double grav{ 9.8 };           // Preferred use of const before type
+    std::cin >> a;
+    const int user_constant = a * 10;               // user_constant can only be evaluated at run time
+                                                    // But I promise not to change it after initialization
+    // constexpr int user_constant_new = a * 10;   // In contrast, constexpr is evaluted at compile time
 
     auto        ab  = 9.8f;     // New formats
     wchar_t     ac;
@@ -59,8 +72,10 @@ int main()
     int*    j   = &h;
     int**   k   = &j;
 
-    bool l      = true;
-    bool m      = false;
+    bool l      = false;                // In bool datatype, everything except 0 is TRUE
+    bool m      = 0;                    // This is FALSE
+    bool m      = 1;                    // This is TRUE
+    bool m1     = 2;                    // This is TRUE
 
     std::string              n = "harsh";
     std::vector<std::string> p = {"harsh","maithani"};
