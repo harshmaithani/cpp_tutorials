@@ -13,6 +13,8 @@
 #include <sstream>          // To use an input string stream object 
 #include <unordered_map>    // To use maps
 #include <cassert>          // Assert, for user testing
+#include <assert.h>         // 
+#include <bits/stdc++.h>    // 
 //#include "harsh.h"        // User defined header file
 
 int main(int argc,char** argv)

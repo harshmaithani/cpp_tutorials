@@ -12,7 +12,7 @@ int main()
         std::cout << x[i] << std::endl;
     }
 
-    for (int j : x)                         // Range based loop
+    for (int j : x)                         // Range based loop since C++11
     {
         std::cout << x[j] << std::endl;
     }
@@ -29,4 +29,27 @@ int main()
         }
         std::cout << std::endl;
     }
+
+    enum class Direction 
+    {
+        up,
+        down,
+        left,
+        right
+    };
+
+    Direction direction = Direction::up;
+
+    switch (direction)
+    {
+        case Direction::up  : std::cout     <<  "Up"    << "\n";
+        break;
+        case Direction::down : std::cout    <<  "Down"  << "\n";
+        break;
+        case Direction::left : std::cout    <<  "Left"  << "\n";
+        break;
+        case Direction::right : std::cout   <<  "Right" << "\n";
+        break;
+    }
+    
 }

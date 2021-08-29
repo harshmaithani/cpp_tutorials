@@ -14,6 +14,12 @@ public:
     int price;
 };
 
+template <typename T>
+T add(T x, T y)
+{
+    return x + y;
+}
+
 void function1(void)
 {std::cout << "No inputs and no outputs" << std::endl;}
 
@@ -45,6 +51,12 @@ return;     // Ok
 // return function1();      // Okay to return a void function.
 // return 5;                // Not okay. Will show error.
 }
+
+void function10(int x[])
+{std::cout << "Passing an array as argument"    << std::endl;}
+
+void function11(int x[10])
+{std::cout << "Passing an array as argument"    << std::endl;}
 
 void function20(void)
 {std::cout << "No return" << std::endl;}
