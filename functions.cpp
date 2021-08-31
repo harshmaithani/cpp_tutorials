@@ -20,6 +20,23 @@ T add(T x, T y)
     return x + y;
 }
 
+int Add(int x,int y)
+{
+    return x + y;
+    std::cout << "Function Add() is called" << std::endl;
+}
+
+int Subtract(int x, int y)
+{
+    return x - y;
+    std::cout << "Function Subtract() is called" << std::endl;
+}
+
+int callFunction(int x, int y, int (*function)(int,int))
+{
+    return function(x,y);
+}
+
 void function1(void)
 {std::cout << "No inputs and no outputs" << std::endl;}
 
@@ -98,15 +115,20 @@ int function26(void)
     return d;
 }
 
-int function27(int x)
-{
-    std::cout << "To demonstrate function overloading"  << std::endl;
-}
+void function27(int x)
+{std::cout << "To demonstrate function overloading"  << std::endl;}
 
-int function28(float x)
-{
-    std::cout << "To demonstrate function overloading"  << std::endl;
-}
+void function28(float x)
+{std::cout << "To demonstrate function overloading"  << std::endl;}
+
+inline int function30(int x)
+{std::cout << "To demonstrate inline functions"  << std::endl;}
+
+static int function31(int x)                                    // Static keyword makes the function visible only in the
+{std::cout << "To demonstrate static usage" << std::endl;}
+
+auto function32(int x)
+{std::cout << "To demonstrate auto usage" << std::endl;}        // From C++14 onwards
 
 int main(int argc, char** argv)
 {
@@ -157,5 +179,8 @@ int main(int argc, char** argv)
     std::cout << "Value of function21() is -    "   << function21() << std::endl;
     std::cout << "Address of function21() is -  "   << function21   << std::endl;
 
+    std::cout << callFunction(5,3,Add)          << std::endl;   // Passing functions as arguments to other functions
+    std::cout << callFunction(5,3,Subtract)     << std::endl;   // Passing functions as arguments to other functions
+    
     return 0;       // Okay. But not needed.
 }

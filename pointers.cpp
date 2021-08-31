@@ -19,6 +19,23 @@ class Car
         
 };
 
+int Add(int x,int y)
+{
+    return x + y;
+    std::cout << "Function Add() is called" << std::endl;
+}
+
+int Subtract(int x, int y)
+{
+    return x - y;
+    std::cout << "Function Subtract() is called" << std::endl;
+}
+
+int callFunction(int x, int y, int (*function)(int,int))
+{
+    return function(x,y);
+}
+
 int main()
 {
     int     a           =       100;        // variable of datatype int
@@ -59,14 +76,28 @@ int main()
         std::cout   <<  std::endl;
     }
 
-    Car*    cp = NULL;                      // Class
+    Car     cp1;                            // Class
+    cp1.name = "Maruti";
+
+    Car*    cp2;                            // Class
     
-    cp->name = "Maruti";                    // Simultaneously dereference the pointer and access the member function
-    (*cp).name = "Suzuki";                  // First dereference, then access the function using dot notation
+    //cp2->name = "Maruti";                 // Simultaneously dereference the pointer and access the member function
+    //(*cp2).name = "Suzuki";               // First dereference, then access the function using dot notation
 
     int*    h{new int};                     // dynamically allocate on the heap and assign the address so we can access later
             *h          =       4;          // assign the value of 4 to allocated memory
     delete h;                               // return the memory pointed 
 
+    int (*p)(int,int);                      // Declaration of Function pointer. Should have same parameters as target functions
+    p = Add;                                // p points to Add() function
+    std::cout << p(5,3) << std::endl;       // Implicit dereference
+    p = Subtract;                           // p points to Subtract() function
+    std::cout << p(5,3) << std::endl;      
+
+    int (*q)(int,int){&Add};                // Initialize q function pointer with Add()
+    std::cout << (*q)(5,3)  << std::endl;   // Explicit dereference
+
+    std::cout << callFunction(5,3,Add)          << std::endl;   // Passing functions as arguments to other functions
+    std::cout << callFunction(5,3,Subtract)     << std::endl;   // Passing functions as arguments to other functions
     
 }

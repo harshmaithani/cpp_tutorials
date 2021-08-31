@@ -8,6 +8,14 @@
 #include <unordered_map>    // To use maps
 #include <cassert>          // Assert, for user testing
 
+void passArray(int prime[5])                    // prime is the actual array
+{   
+    prime[0] = 9;                               // changing it here will change the original argument
+    // void passArray(const int prime[5])       // pass array as const to allow read but not modify
+}
+
+
+
 int main(int argc, char** argv)
 {
     int a[5];                                 // Array declaration by specifying size
@@ -23,6 +31,8 @@ int main(int argc, char** argv)
     std::cout <<  "b[6] = "     <<      b[6]    << std::endl;   // No index out-of-bound checking
     std::cout <<  "c[0] = "     <<      c[0]    << std::endl;
     std::cout <<  "d[0] = "     <<      d[0]    << std::endl;
+    std::cout <<  "address of d  = "     <<      d       << std::endl;
+    std::cout <<  "value of d   =  "     <<     *d      << std::endl;  // *d = d[0]
     std::cout <<  "e[0][0] = "  <<   e[0][0]    << std::endl;
 
     std::cout << "Size of e is "    <<  sizeof(e)       <<  std::endl;
@@ -38,6 +48,10 @@ int main(int argc, char** argv)
     }
 
     char f[]        =    {'h','a','r','s','h'};
-    char g[][5]      =   {{'h','a','r','s','h'},
+    char g[][5]     =    {{'h','a','r','s','h'},
                          {'m','a','i','t','h'}};
+
+    int prime[5]    =    {2,3,4,5,6};
+    passArray(prime);                               // Arrays are pased as pointers and their values can be changed
+
 }
