@@ -21,6 +21,8 @@ int main(int argc, char** argv)
     // Template classes
     // Errors
     // Threads
+    // Structures
+    // Operator overloading
 
     // Putting numbers in 2D arrays
     // Putting characters in 2D arrays

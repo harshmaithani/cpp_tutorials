@@ -11,13 +11,18 @@
 class Car
 {
     public:
+
         std::string name;
-        void changeName(std::string name)
+        void changeName(std::string t_name)
         {
-            this->name = name;              // The this pointer is used to refere to self property inside a class
+            this->name = t_name;              // The this pointer is used to refere to self property inside a class
         }
         int     price;
         int*    wheels  = NULL;
+
+        Car() : name("NoName"),price(0),wheels(NULL) {}
+
+        Car(std::string t_name, int t_price) : name(t_name),price(t_price),wheels(NULL) {}
         
 };
 
@@ -81,45 +86,51 @@ int main()
         std::cout   <<  std::endl;
     }
 
-    Car     car1;                                   // Class on the stack
-
+    Car     car1;                                                                                   // Class on the stack
+                                                                                                    // Uses default constructor
     car1.name       =       "Maruti";
     car1.price      =       1000;
     int wheels      =       4;
     car1.wheels     =       &wheels;
+
     std::cout       <<  "Name of car is "           << car1.name        << std::endl;
     std::cout       <<  "Price of the car is "      << car1.price       << std::endl; 
     std::cout       <<  "Number of wheels is "      << *(car1.wheels)   << std::endl; 
-
-    Car     car2{"NoName",6000};
     
-    car2.name       =       "Honda";
-    car2.wheels     =       &wheels;
+    Car     car2("Suzuki",2000);                                                                    // Uses constructor
+    
+    car2.wheels    =       &wheels;
     std::cout       <<  "Name of car is "           << car2.name        << std::endl;
-    std::cout       <<  "Price of the car is "      << car2.price       << std::endl;  
-    std::cout       <<  "Number of wheels is "      << *car2.wheels     << std::endl;
+    std::cout       <<  "Price of the car is "      << car2.price       << std::endl; 
+    std::cout       <<  "Number of wheels is "      << *(car2.wheels)   << std::endl; 
+
+    Car     car3{"Honda",3000};
+    car3.wheels     =     &wheels;
+    std::cout       <<  "Name of car is "           << car3.name        << std::endl;
+    std::cout       <<  "Price of the car is "      << car3.price       << std::endl;  
+    std::cout       <<  "Number of wheels is "      << *car3.wheels     << std::endl;
     
-    Car*    car3 = new Car{"NoName",4000};          // Class on the heap. Allocate and initialize memory
+    Car*    car4 = new Car{"NoName",4000};                                                          // Class on the heap. Allocate and initialize memory
 
-    car3->name      =       "Ford";                 // Simultaneously dereference the pointer and access the member function
-    (*car3).name    =       "Porsche";              // First dereference, then access the function using dot notation
-    car3->wheels    =       &wheels;
-    std::cout       <<  "Name of car is "           << car3->name       << std::endl;
-    std::cout       <<  "Price of the car is "      << car3->price      << std::endl;  
-    std::cout       <<  "Number of wheels is "      << *car3->wheels    << std::endl;
+    car4->name      =       "Ford";                                                                 // Simultaneously dereference the pointer and access the member function
+    (*car4).name    =       "Porsche";                                                              // First dereference, then access the function using dot notation
+    car4->wheels    =       &wheels;
+    std::cout       <<  "Name of car is "           << car4->name       << std::endl;
+    std::cout       <<  "Price of the car is "      << car4->price      << std::endl;  
+    std::cout       <<  "Number of wheels is "      << *car4->wheels    << std::endl;
 
-    Car     car4    =       *car3;
-    Car*    car5    =       &car4;
+    Car     car5    =       *car4;
+    Car*    car6    =       &car5;
 
-    void*   car6    =   static_cast<void*>(car3);   // Cast to a void pointer
-    Car*    car7    =   static_cast<Car*>(car6);    // Cast to a pointer to a class
+    void*   car7    =   static_cast<void*>(car4);                                                   // Cast to a void pointer
+    Car*    car8    =   static_cast<Car*>(car7);                                                    // Cast to a pointer to a class
 
-    std::cout       <<  "Name of car is "           << car7->name       << std::endl;
-    std::cout       <<  "Price of the car is "      << car7->price      << std::endl;  
-    std::cout       <<  "Number of wheels is "      << *car7->wheels    << std::endl;
+    std::cout       <<  "Name of car is "           << car8->name       << std::endl;
+    std::cout       <<  "Price of the car is "      << car8->price      << std::endl;  
+    std::cout       <<  "Number of wheels is "      << *car8->wheels    << std::endl;
 
-    delete car3;                                    // Don't forget!
-    //delete car5;                                  // Crash! Memory was already deleted!
+    delete car4;                                                                                    // Don't forget!
+    //delete car6;                                                                                  // Crash! Memory was already deleted!
     
     int*    h{new int};                     // dynamically allocate on the heap and assign the address so we can access later
             *h          =       4;          // assign the value of 4 to allocated memory
@@ -166,22 +177,32 @@ int main()
     ptr10 = &v2;
     std::cout   <<  "ptr10 points to "  <<      *ptr10      << std::endl;  
 
-    int new_variable = 1000;
-
     {
-        int* ptr11 = new int(new_variable);
+        std::unique_ptr<Car> ptr12      =   std::make_unique<Car>();
 
-        std::cout       <<   "Ptr11 points to value " <<   *ptr11      <<      std::endl;
+        std::cout       <<  "Ptr12 name:    "   <<  ptr12->name  << std::endl;
+        std::cout       <<  "Ptr12 price:   "   <<  ptr12->price << std::endl;
 
-        *ptr11 = 1500;
+        std::unique_ptr<Car> ptr13      =   std::make_unique<Car>("Ferrari",9500);        
 
-        std::cout       <<   "New variable points to value " <<   new_variable      <<      std::endl;
-
-        std::unique_ptr<int> ptr12(ptr11);
+        std::cout       <<  "Ptr13 name:    "   <<  ptr13->name  << std::endl;
+        std::cout       <<  "Ptr13 price:   "   <<  ptr13->price << std::endl;
         
-        std::cout       <<   "Ptr12 points to value " <<   *ptr12      <<      std::endl;       // Smart pointer. Unique pointer does not share its pointer 
-
+        std::unique_ptr<Car> ptr14(new Car{"Mercedes",8000});
         
+        std::cout       <<   "Ptr14 name   "    <<  ptr14->name         <<      std::endl;       // Smart pointer. Unique pointer does not share its pointer 
+        std::cout       <<   "Ptr14 price  "    <<  ptr14->price        <<      std::endl; 
+        std::cout       <<   "Address of unerlyling raw pointer: "      <<      ptr14.get()      << std::endl;
+
+        auto ptr15      = std::move(ptr14);
+
+        //std::cout         <<  "Ptr12 name "   << ptr12->name  << std::endl;  // This will now give an error
+        std::cout           <<  "Ptr15 name "   << ptr15->name  << std::endl;
+
+        std::shared_ptr<Car> ptr16      =   std::make_shared<Car>();
+
+        std::shared_ptr<Car> ptr17      =   std::make_shared<Car>("Honda",10500);
+
     } // Smart pointer deletes itself here
     
 }
