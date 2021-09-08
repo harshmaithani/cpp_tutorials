@@ -199,9 +199,17 @@ int main()
         //std::cout         <<  "Ptr12 name "   << ptr12->name  << std::endl;  // This will now give an error
         std::cout           <<  "Ptr15 name "   << ptr15->name  << std::endl;
 
-        std::shared_ptr<Car> ptr16      =   std::make_shared<Car>();
+        std::shared_ptr<Car> ptr16      =   std::make_shared<Car>();                            // This is preferred
 
         std::shared_ptr<Car> ptr17      =   std::make_shared<Car>("Honda",10500);
+
+        std::shared_ptr<Car> ptr18(new Car{"Range Rover",9800});                                // This is not preferred 
+
+        auto ptr19(ptr16);                                                                      // Initialize with copy constructor. Increments ref count.
+
+        auto ptr20  = ptr16;                                                                    // Initialize via assignment. Increments ref count.
+
+        std::shared_ptr<Car> ptr21(nullptr);                                                    // Initialize via nullptr. Empty. 
 
     } // Smart pointer deletes itself here
     
