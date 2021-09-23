@@ -17,6 +17,17 @@
 #include <bits/stdc++.h>    // 
 //#include "harsh.h"        // User defined header file
 
+#include <cstdint>          // for fixed-width integers e.g std::int16_t
+#include <algorithm>        // std::max, std::sort(), 
+#include <cmath>            // for std::abs()
+#include <cstdlib>          // for std::exit()
+#include <iterator>         // for std::size()             // To show number of elements in array 
+#include <utility>          // for std::swap(x,y) 
+#include <cstring>
+#include <typeinfo>         // std::cout << typeid(&x).name() << '\n';
+
+#include <cstdlib>          // for std::exit()
+
 int main(int argc,char** argv)
 {
     std::cout << "Headers" << std::endl;
