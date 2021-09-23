@@ -1,47 +1,446 @@
-1.  Protected Keywords
+---------------------------
+Details 
 
-2.  Primitive datatypes                             int,float
+1.  A C++ program is made up of many .cpp files 
+2.  Namespaces
+3.  Preprocessor directives
+    #include
+        Need header guards -    #IFDEF  <NAME_OF_HEADER_FILE>
+                                #DEFINE <NAME_OF_HEADER_FILE>
+                                #ENDIF 
+        Sequence of header files 
+            The paired header file
+            Other headers from your project
+            3rd party library headers
+            Standard library headers
+    #define - to create macros 
+    #pragma once 
+4.  Identifiers     -   Names                   e.g a, x, city_name
+5.  Literals        -   Fixed values            e.g 10, "harsh"
+6.  Variables       -   Values that can change  
+6.  Constants
+        Const is run-time constant
+        Constexpr is compile time constant
+        Bad: using #define - First, because macros are resolved by the preprocessor, all occurrences of the macro are replaced with the defined value just prior to compilation. If you are debugging your code, you won’t see the actual value (e.g. 30) -- you’ll only see the name of the symbolic constant (e.g. MAX_STUDENTS_PER_CLASS). And because these #defined values aren’t variables, you can’t add a watch in the debugger to see their values. If you want to know what value MAX_STUDENTS_PER_CLASS resolves to, you’ll have to find the definition of MAX_STUDENTS_PER_CLASS (which could be in a different file). This can make your programs harder to debug.
 
-3.  User defined                                    struct
+        Best way of using constants across multiple files -
 
-4.  Identifiers                                     variables and function names
+        #ifndef CONSTANTS_H
+        #define CONSTANTS_H
 
-5.  Access specifiers                               public, private, protected. Default is public for struct, private for class.                 
+        // define your own namespace to hold constants
+        namespace constants
+        {
+            inline constexpr double pi { 3.14159 }; // note: now inline constexpr
+            inline constexpr double avogadro { 6.0221413e23 };
+            inline constexpr double myGravity { 9.2 }; // m/s^2 -- gravity is light on this planet
+        // ... other related constants
+        }
+        #endif
 
-6.  Accessor (or getter) functions
+7.  Operators       -   Unary / Binary / Ternary 
+                        ++    / + - *  / ? : 
+8.  Expressions
+9.  Datatypes
+        Primitive           int,float 
+        User definted       struct,class
+        Difference b/w integral and integer
+        Integral types -    Int, short
 
-7.  Mutator (or setter) functions
+        Fixed width 
+            #include <cstdint> // for fixed-width integers
+            std::int16_t
+        Suffixes
+            std::cout << 5; // 5 (no suffix) is type int (by default)
+            std::cout << 5u; // 5u is type unsigned int
+            std::cout << 5L; // 5L is type long
+        Determining type 
+            #include <typeinfo>
+            std::cout << typeid(&x).name() << '\n';
 
-8.  Encapsulation                                   grouping properties together in a class
+        std::size_t 
 
-9.  Abstraction                                     only interface has to be known, hiding the details of how we work with data
+9.  Initialization
+        Direct list initialization  int width {5};  // Best, disallows narrow conversions
+        Copy list initialization    int width = {5}; 
+        Value initialization        int width {};
 
-10. Inheritance                                     parent-child classes
+        int x{};                    // default initialization is 0
+        bool b{};                   // default initialize to false
+            bool can only take 0 and 1 as inputs
+            std::cout << std::boolalpha; // print bools as true or false
+        char ch2{ 'a' };            // initialize with code point for 'a' (stored as integer 97) (preferred)
+            static_cast<int>(ch2) // properway to convert 
 
-11. Polymorphism                                    In the context of object-oriented programming, polymorphism) describes a paradigm in which a function may behave differently depending on how it is called. 
-                                                    In particular, the function will perform differently based on its inputs.
-                                                    Polymorphism can be achieved in two ways in C++: overloading and overriding
+10. Operations 
+        Integer division , Floating point division
+        C++ does not define the order in which function arguments are evaluated.
+        c ? x : y	If c is nonzero (true) then evaluate x, otherwise evaluate y
+        Always parenthesize the conditional part of the conditional operator, and consider parenthesizing the whole thing as well.
 
-12. Public inheritance:                             the public and protected members of the base class listed after the
-                                                    specifier keep their member access in the derived class
+        !(x && y) is equivalent to !x || !y
+        !(x || y) is equivalent to !x && !y
 
-13. Protected inheritance:                          the public and protected members of the base class listed after the
-                                                    specifier are protected members of the derived class
+9.  std::cout
+        Generally 6 digits of precision
+        std::cout << std::setprecision(16); // show 16 digits of precision
 
-14. Private inheritance:                            the public and protected members of the base class listed after the
-                                                    specifier are private members of the derived class
+9.  Escape sequence
+        \n                  -   New line
+        \t                  -   Tab 
+10. Scope                   -   Compile time property 
+        Block scope         -   Local variables
+                                Function parameters
+                                User-defined datatypes 
+        File scope          -   Global variables
+                                Functions
+                                User-defined datatypes  
 
-15. Friend class                                    friend class can access private members of its friend                                          
+11. Duration (life)         -   Run time property 
+        Automatic storage   -   Local variables  (created and destroyed automatically)
+                                Function parameters  
+        Static duration     -   Global variables (for whole of program)
+                                Static local variables
+        Dynamic duration    -   Dynamically allocated variables  
 
-16. Virtual functions                               
+12. Visibility / accessibility  
+        Local variables     -   Defined inside a function
+                Default     -   Automatic storage duration
+                static      -   Static keyword gives static duration (for whole of program)
+        Global variables    -   Defined outside a function
+            Const or constexpr 
+                Default     -   Internal linkage, visible only in that file 
+                extern      -   extern keyword give external linkage, still needs forward declarations, and prefix extern in other file 
+            Non-constant
+                Default     -   External linkage, visible everywhere in the program 
+                static      -   makes internal linkage, visible only to that file, not outside
+        Functions           
+                Default     -   external linkage, forward declarations are still necessary, but no prefix extern 
+                static      -   makes internal linkage, not visible outside file
 
-17. Pure virtual functions 
+11. Storage class specifiers
+        Static
+        Extern
+        Mutable 
 
-18. Override                                        "Overriding" a function occurs when a derived class defines the
-                                                    implementation of a virtual function that it inherits from a base class.
-                                                    It is possible, but not required, to specify a function declaration as override.
+12. Access specifiers
+        Public                  Structs -   default is public
+        Protected
+        Private                 Classes -   default is private. 
+        
+        
+13. Status codes
+        0
+        EXIT_SUCCESS    
+        EXIT_FAILURE
 
-19. Lambda functions                                []() {}; // defines a lambda with no captures, no parameters, and no return type
+10. Functions
+        Trailing return type syntax
+            auto add(int x, int y) -> int;      returns int, helpful to make function names line up 
 
-20. Functors                                        Class objects working as functions by overloading the () operator. They can retain the
-                                                    state by using the constructor of the class.
+        Function overloading    
+            Compiler differentiates overloaded functions via overload resolution 
+            Considered for overload differentiation 
+                Number of parameters
+                Type of parameters 
+                For member functions also considered -
+                    Return types
+                    Const / volatile
+        
+        Resolving overloaded function calls 
+            Compiler steps through a sequence of rules 
+
+        Default argument 
+            Default arguments can only be supplied for the rightmost parameters.
+            Arguments and parameters are matched from left side 
+            Default arguments can not be redeclared
+                --> declare the default argument in the forward declaration and not in the function definition
+
+        Virtual functions       
+        Lambda functions    -   []() {}; // defines a lambda with no captures, no parameters, and no return type
+
+        Functors            -   Class objects working as functions by overloading the () operator. They can retain the
+                                state by using the constructor of the class.
+
+14. Pointers
+        Raw pointers
+        Void pointers       -   Points to a valid memory, but type is unknown
+        Null pointers       -   Type is known, no valid memory address 
+        
+        Smart pointers      -   Encapsulate raw pointers 
+            unique_ptr      -   Exactly one owner of the pointer.
+                                Can be moved, but not copied or shared.   
+            shared_ptr      -   Reference counted
+                                Multiple owners of raw pointer
+            weak_ptr        -   Access object of shared pointer but
+                                Not reference counted
+
+        int* ptr { nullptr };   // note: ptr is still an integer pointer, just set to a null value
+        Arrays decay into pointers
+
+        int* ptr1{new int(5)};
+        int* ptr2{new int{6}};
+        delete ptr1; 
+
+        Deleting memory does not mean deleting variable. 
+
+        Dangling pointers 
+        Memory leak 
+
+        Function pointers 
+            int* x;
+            int (*fcn)(); // function pointer
+            int (*fcn)(){&foo}; // function pointer pointing to foo 
+
+            Calling a function using function pointer 
+                (*fcn)(5);  // Explicit dereference
+                fcn(5);     // Implicit dereference 
+
+15. Type alias
+        Alias               -   using distance = double;
+        Typedef             -   typedef double distance; 
+
+15. Type deduction
+        variables           -   auto            needs initialization, drops constant, references 
+        functions           -   auto            such functions must be fully defined before they can be used (a forward declaration is not sufficient).
+
+15. Type Conversions
+        Implicit
+            Standard Conversions
+                Numeric promotions          -   value preserving 
+                Floating point promotions   -   float can be converted to double 
+                Integral promotions         -   short, char, bool can be converted to int 
+            Numeric conversions
+                integral                    -->     integral 
+                integral                    -->     floating point 
+                integral                    -->     bool 
+                floating point              -->     floating point
+                floating point              -->     integral 
+                floating point              -->     bool
+            Arithmetic conversions 
+                There is a priority list of types
+                Lower priority type is converted to higher priority type, and then operation is performed
+                int 2 + double 3.0 = 5.5 
+            Narrowing conversions
+                double      -->     integral (data loss)  // compiler issues warning 
+                When narrowing conversion is required use static_cast<int>(double) 
+
+        Explicit
+            C 
+                C-style casts       -   Can perform all 4 conversions below 
+            C++
+                Dynamic cast        -   Polymorphic types. 
+                                        Only pointers and references. 
+                                        Run time checks are performed. 
+                                        For pointers - If it fails, it returns a null pointer. 
+                                        For references - If it fails, it returns a bad cast. 
+                Static cast         -   Non-polymorphic types. 
+                                        Pointers, references. And fundamental types. 
+                                        No run time checks are performed. 
+                Reinterpret cast    -   binary copying.
+                                        No run time checks. 
+                Const cast          -   Manipulates the constness of object 
+
+16. Object oriented programming (OOP)
+        Class - object 
+        Abstraction                 -   only interface has to be known, hiding the details of how we work with data
+        Inheritance                 -   parent-child classes
+        Polymorphism                -   In the context of object-oriented programming, polymorphism) describes a paradigm in which a function may behave differently depending on how it is called. 
+                                        In particular, the function will perform differently based on its inputs.
+                                        Polymorphism can be achieved in two ways in C++: overloading and overriding
+            Compile time vs Run time 
+        Encapsulation               -   grouping properties together in a class
+
+        Virtual function            -   a function in the base class that is redefined in the derived class. 
+        Pure virtual function       -   
+        Override                    -   Overriding a virtual function in a derived class. 
+                                        It is possible, but not required, to specify a function declaration as override.
+
+        Polymorphic class           -   A class that has atleast one virtual function is a polymorphic class. 
+        Abstract class              -   A class that has atleast one pure virtual function is an abstract class.
+    
+16. Struct
+        struct Employee
+        {
+            int id{};
+            int age{};
+            double wage{};
+        };
+
+        Employee joe{ 1, 32, 60000.0 }; // joe.id = 1, joe.age = 32, joe.wage = 60000.0
+
+        A function can also return a struct, which is one of the few ways to have a function return multiple variables.
+        Nested structs are possible
+
+17. Templates
+        function templates only generate functions, and that too upon the first function call (instantiation), not before that, and not again.
+
+        max<int>(2,2)   //  instantiates and calls max<int>(int,int)
+        max<int>(3,3)   //  calls already instantiated function max<int>(int, int)
+
+        Template argument deduction
+            max<int>(2,2)  can also be written as 
+            max<>(2,2)
+            max(2,2)        // first searches for a non-template function, then template function
+                            // does type deduction but not type conversion 
+                            // type conversion is done only when resolving function overloads, not when performing template argument deduction.
+
+            Good example 
+
+                template <typename T>
+                T max(T x, T y)
+                {
+                    return (x > y) ? x : y;
+                }
+
+                int max(int x, int y)
+                {
+                    return (x > y) ? x : y;
+                }
+
+                int main()
+                {
+                    std::cout << max<int>(1, 2) << '\n'; // selects max<int>
+                    std::cout << max<>(1, 2) << '\n'; // deduces max<int>(int, int) (non-template functions not considered)
+                    std::cout << max(1, 2) << '\n'; // calls function max(int, int)
+
+                    return 0;
+                }
+            
+            Function templates with non-template parameters
+                template <typename T>
+                int someFcn (T x, double y)
+                {
+                    return 5;
+                }
+        
+            Function templates with multiple type parameters
+                template <typename T, typename U>
+                auto max(T x, U y)
+                {
+                    return (x > y) ? x : y;
+                }
+
+            Abbreviated function templates (In C++ 20)
+                auto max(auto x, auto y)
+                {
+                    return (x > y) ? x : y;
+                }
+
+                becomes 
+
+                template <typename T, typename U>
+                auto max(T x, U y)
+                {
+                    return (x > y) ? x : y;
+                }
+
+18. I/O
+        std::cin retains residual values
+        char - remaining values after 1st char
+        std::string - remaining values after whitespace                                                                    
+        std::getline(std::cin >> std::ws, name); // read a full line of text into name
+    
+    
+    Null statement  -    Don't do anything 
+
+
+// return true if the difference between a and b is within epsilon percent of the larger of a and b
+bool approximatelyEqual(double a, double b, double epsilon)
+{
+    return (std::abs(a - b) <= (std::max(std::abs(a), std::abs(b)) * epsilon));
+}
+
+Short circuit evaluation 
+
+De Morgan's Law
+
+Name hiding, shadowing of variables 
+
+double getGravity() // this function can be exported to other files to access the global outside of this file
+{
+    return constants::gravity;
+}
+
+Static local variables // Initialize them 
+int generateID()
+{
+    static int s_itemID{ 0 };
+    return s_itemID++; // makes copy of s_itemID, increments the real s_itemID, then returns the value in the copy
+}
+
+using std::cout;        //  cout should resolve to std::cout 
+using namespace std;
+
+Switch-case executes till break is encountered. 
+[[fallthrough]];        // to let the reader know that fallthrough is intentional
+
+Static member functions can be used even without objects 
+
+Switch-case works with -
+    int         -   directly
+    char        -   directly
+    string      -   indirectly using stoi 
+Examples of switch -
+
+void printMath(int x, int y, char ch)
+{
+    switch (ch)
+    {
+    case '+':
+        std::cout << x << " + " << y << " = " << x + y << '\n';
+        break; // don't fall-through to next case
+    case '-':
+        std::cout << x << " - " << y << " = " << x - y << '\n';
+        break; // don't fall-through to next case
+    }
+}
+
+std::cerr << "Error";
+
+#include <cassert> // for assert()
+static_assert(sizeof(int) == 4, "int must be 4 bytes");
+A static_assert is an assertion that is checked at compile-time rather than at runtime
+
+    C++17 - 
+    #include <iterator>         // for std::size
+    std::size(array)            // To show number of elements in array 
+
+    sizeof(array) / sizeof(array[0]) // For pre-C++17 
+
+    int length{ static_cast<int>(std::size(array)) };
+
+    Sorting 
+        #include <utility>
+        std::swap(x,y) 
+
+        #include <algorithm> // for std::sort
+
+        int array[]{ 30, 50, 20, 10, 40 };
+	    std::sort(std::begin(array), std::end(array));
+
+    C-string
+        #include <cstring>
+
+        char source[]{ "Copy this!" };
+        char dest[50];
+        std::strcpy(dest, source);
+
+        strcat()    -- Appends one string to another (dangerous)
+        strncat()   -- Appends one string to another (with buffer length check)
+        strcmp()    -- Compare two strings (returns 0 if equal)
+        strncmp()   -- Compare two strings up to a specific number of characters (returns 0 if equal)
+
+    Range based for loop
+
+    Example -
+        std::string array[]{ "peter", "likes", "frozen", "yogurt" };
+        for (const auto& element: array) // element is a const reference to the currently iterated array element
+        {
+            std::cout << element << ' ';    
+        }
+
+    Deleting a two dimensional array 
+        for (int count = 0; count < 10; ++count)
+        delete[] array[count];
+        delete[] array; // this needs to be done last

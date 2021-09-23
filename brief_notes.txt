@@ -1,0 +1,172 @@
+Important terms
+
+1.  Namespaces
+2.  Preprocessor directives 
+3.  Protected keywords 
+4.  Identifiers
+5.  Literals
+6.  Variables
+        Global
+        local
+        variable shadowing(name hiding)
+7.  Constants
+8.  Operators
+        Precedence list
+        Operator overloading
+9.  Expressions
+10  Types
+        Fundamental data Types
+        object size
+        fixed width integers 
+11. Alias
+12. Deduction 
+13. Typedef
+    Assignment
+14.  Scope, duration and linkage 
+15. Declarations 
+16. Definitions 
+17. Initializations
+        Copy
+        Direct
+        Uniform / List / Brace 
+
+18. Memory allocation
+        new
+        delete 
+19. Conditionals
+        If
+        Switch
+        break 
+        continue  
+20. Loops
+        For 
+        While 
+21. OOP 
+    Class - object 
+        Abstraction
+        Inheritance
+        Polymorphism
+            Compile time vs Run time 
+        Encapsulation
+
+22. Functions
+        Forward declarations
+        Function definition
+            Parameters
+            Default arguments
+                C++ doesn't specify whether arguments are matched with parameters left to right or right to left 
+            Pass by 
+                value 
+                address
+                reference
+            Body 
+            Return type
+                Void
+                value 
+                reference
+                address 
+            Return statement
+            Inline 
+            Friend function 
+        Function call
+            Arguments
+        Function overloading
+        Function pointers 
+        Lambdas 
+
+23. Classes 
+        Definition
+            Class attributes    /   Member variables    /   Fields
+            Class behaviour     /   Member functions    /   Methods
+            Constructors 
+            Destructor
+            Access specifiers 
+            Accessor functions  /   Getters
+            Mutator functions   /   Setters 
+
+        Object Instantiation 
+        this pointer 
+        Static member functions 
+        Virtual functions
+        Pure virtual functions 
+        Friend class 
+        Operator overloading
+    
+24. Structs 
+
+25. Templates 
+        Function templates 
+        Class templates 
+        Template initialization 
+
+26. Pointers
+        Raw pointers 
+        Void pointers
+        Null pointers 
+        Smart pointers
+            Unique ptr 
+            Shared ptr
+            Weak ptr
+
+        Function pointers 
+
+        Deleting
+        Memory leak
+        Dangling pointers  
+
+27. References 
+
+28. Iterators 
+
+29. Conversions
+        Implicit conversions 
+            Promotions 
+            Numeric conversions
+            Arithmetic conversions
+        Explicit conversions 
+        C   
+            Functional type
+        C++ 
+            Dynamic cast 
+            Static cast 
+            Reinterpret cast
+            Const cast
+
+30. Refactoring
+31. Logger 
+32. std::cout 
+        Escape sequences 
+        set precision 
+        printf 
+33. Status codes 
+34. Exceptions 
+        Try
+        Catch
+        Throw 
+35. I/O
+
+Some Definitions
+
+1.  const int a{10};
+2.  const int* b{&a};       // b is a pointer to a const int. value can change
+3.  const int* c{&a};       // c is a const pointer to a const int. address can't change.
+
+4.  int x(int);             // function forward declaration 
+    int x(int m){}          // function defintion
+    x(m);                   // function call 
+    int x(m);               // datatype initialization 
+    int x{m};               // datatype initialization 
+    int* x(&m);             // pointer initialization
+    int (*x)();             // function pointer initialization 
+    x = &m;
+    (*x)(n);                // function call
+    x(n);                   // function call    
+    
+5.        int x (int m){};          // pass by value 
+          int x (int &m){};         // pass by reference 
+          int x (int* m){};         // pass by address
+          int x (const int& m){};   // const ref 
+    const int x (int m){};          // return const int 
+    const int* x (int m){};         // return pointer to const int 
+    const int x const (int m){};    // const member function 
+   

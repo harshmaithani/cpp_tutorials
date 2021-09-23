@@ -54,4 +54,10 @@ int main(int argc, char** argv)
     int prime[5]    =    {2,3,4,5,6};
     passArray(prime);                               // Arrays are pased as pointers and their values can be changed
 
+    std::string array[]{ "peter", "likes", "frozen", "yogurt" };
+    for (const auto& element: array) // element is a const reference to the currently iterated array element
+    {
+        std::cout << element << ' ';    
+    }
+
 }
