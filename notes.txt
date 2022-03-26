@@ -1,5 +1,5 @@
----------------------------
 Details 
+---------------------------
 
 1.  A C++ program is made up of many .cpp files 
 2.  Namespaces
@@ -15,13 +15,30 @@ Details
             Standard library headers
     #define - to create macros 
     #pragma once 
-4.  Identifiers     -   Names                   e.g a, x, city_name
-5.  Literals        -   Fixed values            e.g 10, "harsh"
-6.  Variables       -   Values that can change  
-6.  Constants
-        Const is run-time constant
-        Constexpr is compile time constant
-        Bad: using #define - First, because macros are resolved by the preprocessor, all occurrences of the macro are replaced with the defined value just prior to compilation. If you are debugging your code, you won’t see the actual value (e.g. 30) -- you’ll only see the name of the symbolic constant (e.g. MAX_STUDENTS_PER_CLASS). And because these #defined values aren’t variables, you can’t add a watch in the debugger to see their values. If you want to know what value MAX_STUDENTS_PER_CLASS resolves to, you’ll have to find the definition of MAX_STUDENTS_PER_CLASS (which could be in a different file). This can make your programs harder to debug.
+4.  Protected keywords 
+5.  Main()
+        Status codes
+            0
+            EXIT_SUCCESS    
+            EXIT_FAILURE
+        SIGINT
+        void main()
+        int main()
+        int main(int argc,char* argv[])
+6.  Identifiers     -   Names                   e.g a, x, city_name
+7.  Literals        -   Fixed values            e.g 10, "harsh"
+8.  Variables       -   Values that can change  
+        global 
+        local
+        variable shadowing (name hiding)
+9.  Constants
+        Const       -   run-time constant
+        Constexpr   -   compile time constant
+        Volatile    -   volatile int x = 100;  prevent the compiler from optimizing the code  
+
+        Bad: using #define - First, because macros are resolved by the preprocessor, all occurrences of the macro are replaced with the defined value just prior to compilation. 
+                            If you are debugging your code, you won’t see the actual value (e.g. 30) -- you’ll only see the name of the symbolic constant (e.g. MAX_STUDENTS_PER_CLASS). And because these #defined values aren’t variables, 
+                            you can’t add a watch in the debugger to see their values. If you want to know what value MAX_STUDENTS_PER_CLASS resolves to, you’ll have to find the definition of MAX_STUDENTS_PER_CLASS (which could be in a different file). This can make your programs harder to debug.
 
         Best way of using constants across multiple files -
 
@@ -37,11 +54,13 @@ Details
         // ... other related constants
         }
         #endif
-
-7.  Operators       -   Unary / Binary / Ternary 
+10. Operators       -   Unary / Binary / Ternary 
                         ++    / + - *  / ? : 
-8.  Expressions
-9.  Datatypes
+        Precedence list 
+        Operator overloading
+
+11. Expressions
+12. Types (Datatypes)
         Primitive           int,float 
         User definted       struct,class
         Difference b/w integral and integer
@@ -57,154 +76,16 @@ Details
         Determining type 
             #include <typeinfo>
             std::cout << typeid(&x).name() << '\n';
+        Object size 
 
         std::size_t 
-
-9.  Initialization
-        Direct list initialization  int width {5};  // Best, disallows narrow conversions
-        Copy list initialization    int width = {5}; 
-        Value initialization        int width {};
-
-        int x{};                    // default initialization is 0
-        bool b{};                   // default initialize to false
-            bool can only take 0 and 1 as inputs
-            std::cout << std::boolalpha; // print bools as true or false
-        char ch2{ 'a' };            // initialize with code point for 'a' (stored as integer 97) (preferred)
-            static_cast<int>(ch2) // properway to convert 
-
-10. Operations 
-        Integer division , Floating point division
-        C++ does not define the order in which function arguments are evaluated.
-        c ? x : y	If c is nonzero (true) then evaluate x, otherwise evaluate y
-        Always parenthesize the conditional part of the conditional operator, and consider parenthesizing the whole thing as well.
-
-        !(x && y) is equivalent to !x || !y
-        !(x || y) is equivalent to !x && !y
-
-9.  std::cout
-        Generally 6 digits of precision
-        std::cout << std::setprecision(16); // show 16 digits of precision
-
-9.  Escape sequence
-        \n                  -   New line
-        \t                  -   Tab 
-10. Scope                   -   Compile time property 
-        Block scope         -   Local variables
-                                Function parameters
-                                User-defined datatypes 
-        File scope          -   Global variables
-                                Functions
-                                User-defined datatypes  
-
-11. Duration (life)         -   Run time property 
-        Automatic storage   -   Local variables  (created and destroyed automatically)
-                                Function parameters  
-        Static duration     -   Global variables (for whole of program)
-                                Static local variables
-        Dynamic duration    -   Dynamically allocated variables  
-
-12. Visibility / accessibility  
-        Local variables     -   Defined inside a function
-                Default     -   Automatic storage duration
-                static      -   Static keyword gives static duration (for whole of program)
-        Global variables    -   Defined outside a function
-            Const or constexpr 
-                Default     -   Internal linkage, visible only in that file 
-                extern      -   extern keyword give external linkage, still needs forward declarations, and prefix extern in other file 
-            Non-constant
-                Default     -   External linkage, visible everywhere in the program 
-                static      -   makes internal linkage, visible only to that file, not outside
-        Functions           
-                Default     -   external linkage, forward declarations are still necessary, but no prefix extern 
-                static      -   makes internal linkage, not visible outside file
-
-11. Storage class specifiers
-        Static
-        Extern
-        Mutable 
-
-12. Access specifiers
-        Public                  Structs -   default is public
-        Protected
-        Private                 Classes -   default is private. 
-        
-        
-13. Status codes
-        0
-        EXIT_SUCCESS    
-        EXIT_FAILURE
-
-10. Functions
-        Trailing return type syntax
-            auto add(int x, int y) -> int;      returns int, helpful to make function names line up 
-
-        Function overloading    
-            Compiler differentiates overloaded functions via overload resolution 
-            Considered for overload differentiation 
-                Number of parameters
-                Type of parameters 
-                For member functions also considered -
-                    Return types
-                    Const / volatile
-        
-        Resolving overloaded function calls 
-            Compiler steps through a sequence of rules 
-
-        Default argument 
-            Default arguments can only be supplied for the rightmost parameters.
-            Arguments and parameters are matched from left side 
-            Default arguments can not be redeclared
-                --> declare the default argument in the forward declaration and not in the function definition
-
-        Virtual functions       
-        Lambda functions    -   []() {}; // defines a lambda with no captures, no parameters, and no return type
-
-        Functors            -   Class objects working as functions by overloading the () operator. They can retain the
-                                state by using the constructor of the class.
-
-14. Pointers
-        Raw pointers
-        Void pointers       -   Points to a valid memory, but type is unknown
-        Null pointers       -   Type is known, no valid memory address 
-        
-        Smart pointers      -   Encapsulate raw pointers 
-            unique_ptr      -   Exactly one owner of the pointer.
-                                Can be moved, but not copied or shared.   
-            shared_ptr      -   Reference counted
-                                Multiple owners of raw pointer
-            weak_ptr        -   Access object of shared pointer but
-                                Not reference counted
-
-        int* ptr { nullptr };   // note: ptr is still an integer pointer, just set to a null value
-        Arrays decay into pointers
-
-        int* ptr1{new int(5)};
-        int* ptr2{new int{6}};
-        delete ptr1; 
-
-        Deleting memory does not mean deleting variable. 
-
-        Dangling pointers 
-        Memory leak 
-
-        Function pointers 
-            int* x;
-            int (*fcn)(); // function pointer
-            int (*fcn)(){&foo}; // function pointer pointing to foo 
-
-            Calling a function using function pointer 
-                (*fcn)(5);  // Explicit dereference
-                fcn(5);     // Implicit dereference 
-
-15. Type alias
+13. Type alias (Datatype alias)
         Alias               -   using distance = double;
         Typedef             -   typedef double distance; 
-
-15. Type deduction
+14. Type deduction (Datatype deduction)
         variables           -   auto            needs initialization, drops constant, references 
         functions           -   auto            such functions must be fully defined before they can be used (a forward declaration is not sufficient).
-
-15. Type Conversions
+15. Type Conversions (Datatype conversions)
         Implicit
             Standard Conversions
                 Numeric promotions          -   value preserving 
@@ -240,8 +121,102 @@ Details
                 Reinterpret cast    -   binary copying.
                                         No run time checks. 
                 Const cast          -   Manipulates the constness of object 
+16. Scope                   -   Compile time property 
+        Block scope         -   Local variables
+                                Function parameters
+                                User-defined datatypes 
+        File scope          -   Global variables
+                                Functions
+                                User-defined datatypes  
+17. Duration (life)         -   Run time property 
+        Automatic storage   -   Local variables  (created and destroyed automatically)
+                                Function parameters  
+        Static duration     -   Global variables (for whole of program)
+                                Static local variables
+        Dynamic duration    -   Dynamically allocated variables  
+18. Linkage (Visibility / accessibility)
+        Local variables     -   Defined inside a function
+                Default     -   Automatic storage duration
+                static      -   Static keyword gives static duration (for whole of program)
+        Global variables    -   Defined outside a function
+            Const or constexpr 
+                Default     -   Internal linkage, visible only in that file 
+                extern      -   extern keyword give external linkage, still needs forward declarations, and prefix extern in other file 
+            Non-constant
+                Default     -   External linkage, visible everywhere in the program 
+                static      -   makes internal linkage, visible only to that file, not outside
+        Functions           
+                Default     -   external linkage, forward declarations are still necessary, but no prefix extern 
+                static      -   makes internal linkage, not visible outside file 
+19. Storage class specifiers
+        Auto 
+        Register 
+        Static
+        Extern
+        Mutable             -   keyword allows a variable to become modifiable even if it is a member variable of a const object 
+20. Declarations
+21. Definitions
+22. Initializations
+        Direct list initialization  int width {5};  // Best, disallows narrow conversions
+        Copy list initialization    int width = {5}; 
+        Value initialization        int width {};
 
-16. Object oriented programming (OOP)
+        int x{};                    // default initialization is 0
+        bool b{};                   // default initialize to false
+            bool can only take 0 and 1 as inputs
+            everything is TRUE except 0
+            std::cout << std::boolalpha; // print bools as true or false
+        char ch2{ 'a' };            // initialize with code point for 'a' (stored as integer 97) (preferred)
+            static_cast<int>(ch2) // properway to convert 
+23. Memory allocation
+        new
+        delete
+            delete
+            delete[] 
+24. Operations 
+        Integer division , Floating point division
+        C++ does not define the order in which function arguments are evaluated.
+        c ? x : y	If c is nonzero (true) then evaluate x, otherwise evaluate y
+        Always parenthesize the conditional part of the conditional operator, and consider parenthesizing the whole thing as well.
+        Short circuit evaluation 
+        !(x && y) is equivalent to !x || !y
+        !(x || y) is equivalent to !x && !y
+25. Conditionals
+        If
+        break 
+        continue 
+        Switch-case works with integral types (int,char)
+            int         -   directly
+            char        -   directly
+            string      -   indirectly using stoi 
+
+            Switch-case executes till break is encountered. 
+            [[fallthrough]];        // to let the reader know that fallthrough is intentional
+
+            Examples of switch -
+
+                void printMath(int x, int y, char ch)
+                {
+                    switch (ch)
+                    {
+                    case '+':
+                        std::cout << x << " + " << y << " = " << x + y << '\n';
+                        break; // don't fall-through to next case
+                    case '-':
+                        std::cout << x << " - " << y << " = " << x - y << '\n';
+                        break; // don't fall-through to next case
+                    }
+                }
+26. Loops
+        For
+            
+            Example 3 -
+            Animal* animals[]{ &fred, &garbo, &misty, &pooky, &truffle, &zeke };
+            for (const auto *animal : animals)
+                std::cout << animal->getName() << " says " << animal->speak() << '\n';
+
+        While 
+27. Object oriented programming (OOP)
         Class - object 
         Abstraction                 -   only interface has to be known, hiding the details of how we work with data
         Inheritance                 -   parent-child classes
@@ -258,21 +233,202 @@ Details
 
         Polymorphic class           -   A class that has atleast one virtual function is a polymorphic class. 
         Abstract class              -   A class that has atleast one pure virtual function is an abstract class.
-    
-16. Struct
+
+28. Functions
+        Forward declarations
+            Normal functions        -   Function can't call the function below it, without forward declaration 
+            Member functions        -   Limitation doesn't apply  
+        Function definition
+            Parameters
+            Default arguments
+                C++ doesn't specify whether arguments are matched with parameters left to right or right to left 
+                Default arguments can only be supplied for the rightmost parameters.
+                Arguments and parameters are matched from left side 
+                Default arguments can not be redeclared
+                    --> declare the default argument in the forward declaration and not in the function definition
+            Pass by 
+                value 
+                address
+                reference
+            Body 
+            Return type
+                Void
+                value 
+                reference
+                address 
+                Trailing return type syntax
+                    auto add(int x, int y) -> int;      returns int, helpful to make function names line up 
+
+            Return statement
+                int fun()
+                {
+                    std::cout << "Hi << std::endl;
+                }
+
+                fun();
+
+                What will be the output if the function output isnt received 
+                    - Answer: No compiler error. 
+
+            Inline 
+            Friend function 
+        Function call
+            Arguments
+        Function overloading
+            Compiler differentiates overloaded functions via overload resolution 
+            Considered for overload differentiation 
+                Number of parameters
+                Type of parameters 
+                For member functions also considered -
+                    Return types
+                    Const / volatile
+        Function pointers 
+        Lambdas (Lambda functions)
+            []() {}; // defines a lambda with no captures, no parameters, and no return type
+
+        Resolving overloaded function calls 
+            Compiler steps through a sequence of rules 
+
+        Virtual functions           - 
+        Pure virtual functions      -          
+        Functors            -   Class objects working as functions by overloading the () operator. They can retain the
+                                state by using the constructor of the class.
+
+        Const functions     -   
+
+29. Classes
+        Definition
+            Class attributes    /   Member variables    /   Fields
+            Class behaviour     /   Member functions    /   Methods
+            Constructors
+                Default Constructors
+                Copy Constructors
+                        Default copy Constructors
+                        Shallow copying         - A Shallow copy duplicates as little as possible. 
+                                                    A shallow copy of a collection is a copy of the collection structure, not the elements. With a shallow copy, two collections now share the individual elements.                        
+                        Deep copying            - A Deep copy duplicates everything. 
+                                                    A deep copy of a collection is two collections with all of the elements in the original collection duplicated.
+                Initializer list
+                        Initialization is not done according to the sequence of variables in the initializer list, but according to the sequence of declaration of member variables in the class.
+
+            Destructors
+                No overloading possible
+            Access specifiers
+                Public                  Structs -   default is public
+                Protected
+                Private                 Classes -   default is private.
+            Accessor functions  /   Getters
+            Mutator functions   /   Setters 
+
+        Static member variables can be used even without objects 
+        Static member functions can be used even without objects
+                Don't have a this pointer  
+        Const classes               -   Once a const class object has been initialized via constructor, any attempt to modify the member variables of the object is disallowed, 
+                                        as it would violate the const-ness of the object. 
+                                        const class objects can only explicitly call const member functions
+
+                                        i.e 
+                                        const class -   you can't modify member variables
+                                                        you can't call non-const member functions
+
+        Const member functions      -   A const member function is a member function that guarantees it will -
+                                        not modify the object or 
+                                        call any non-const member functions (as they may modify the object) 
+                                        
+                                        For member functions defined outside of the class definition, the const keyword must be used on both the function prototype in the class definition and on the function definition:
+
+                                        class Something
+                                        {
+                                        public:
+                                            int m_value {};
+                                            Something(): m_value{0} { }
+                                            int getValue() const; // note addition of const keyword here
+                                        };
+                                        int Something::getValue() const // and here
+                                        {
+                                            return m_value;
+                                        } 
+        The hidden *this pointer 
+                Calc& Calc::add(int value)
+                {
+                    m_value += value;
+                    return *this;
+                }
+
+        Virtual functions           -   virtual void show();
+
+                                        virtual functions must match in signature and return type 
+
+                                        Important - 
+                                        Also note that if a function is marked as virtual, all matching overrides are also 
+                                        considered virtual, even if they are not explicitly marked as such.
+                                        They are considered implicitly virtual. 
+                                        Never call virtual functions from constructors or destructors.
+
+                                    -   covariant return type
+                                        return type mismatch for virtual functions is alowed only for one Exceptions
+                                        when the function returns a pointer to the class. 
+
+        Pure virtual functions      -   virtual void show() = 0;
+                                        A class having atleast one pure virtual function becomes an abstract class.
+                                        An abstract class can not be instantiated. 
+
+        Abstract class              -   A derived class must redefine the pure virtual function in the base class,
+                                        else it will also become an abstract class, and can't be instantiated. 
+
+        Interface class             -   A class with ONLY pure virtual functions.  
+
+        Friend functions
+        Constructors
+
+        delete                      -   int getValue() = delete; // mark this function as inaccessible
+
+        override                    -
+        final                       -   where we want to prevent inheriting from a class, the final specifier is applied 
+                                        after the class name. If a class tries to inherit from this class, it will give compiler error.
+                                        
+                                        class B final : public A // note use of final specifier here
+                                        {
+                                            public:
+	                                        std::string_view getName() override { return "B"; }
+                                        };
+        
+        Parent* parent{new Child};   -   Pointer.   Works. Depends on virtual functions in base class. 
+        Child* child{new Parent};    -   Pointer.   Compiler error
+        Parent& parent{child};       -   Reference. Works. Depends on virtual functions in base class.
+        Parent parent{child};        -   Assignment.Works. Object slicing. 
+
+        Frankenobject
+
+        Sequence            -
+                Memory for derived is set aside (enough for both the Base and Derived portions)
+                The appropriate Derived constructor is called
+                    the Base constructor is called first. 
+                    The Base constructor sets up the Base portion of the object, 
+                    control is returned to the Derived constructor
+                    Derived constructor is allowed to finish up its job.
+                The Base object is constructed first using the appropriate Base constructor. If no base constructor is specified, the default constructor will be used.
+                The member initializer list initializes variables
+                The body of the constructor executes
+                Control is returned to the caller
+
+
+30. Structs
         struct Employee
         {
             int id{};
             int age{};
             double wage{};
-        };
+        }emp;                           // struct variable declaration with struct declaration 
 
         Employee joe{ 1, 32, 60000.0 }; // joe.id = 1, joe.age = 32, joe.wage = 60000.0
+
+        Employee emp; 
 
         A function can also return a struct, which is one of the few ways to have a function return multiple variables.
         Nested structs are possible
 
-17. Templates
+31. Templates
         function templates only generate functions, and that too upon the first function call (instantiation), not before that, and not again.
 
         max<int>(2,2)   //  instantiates and calls max<int>(int,int)
@@ -334,16 +490,204 @@ Details
                 {
                     return (x > y) ? x : y;
                 }
+32. Vectors 
+33. Pointers
+        Raw pointers
+        Void pointers       -   Points to a valid memory, but type is unknown
+        Null pointers       -   Type is known, no valid memory address 
+        
+        Smart pointers      -   Encapsulate raw pointers 
+                                A smart pointer is a class that wraps a 'raw' (or 'bare') C++ pointer, to manage the lifetime of the object being pointed to.
+            unique_ptr      -   Exactly one owner of the pointer.
+                                Can be moved, but not copied or shared.   
+            shared_ptr      -   Reference counted
+                                Multiple owners of raw pointer
+            weak_ptr        -   Access object of shared pointer but
+                                Not reference counted
 
-18. I/O
-        std::cin retains residual values
-        char - remaining values after 1st char
-        std::string - remaining values after whitespace                                                                    
-        std::getline(std::cin >> std::ws, name); // read a full line of text into name
-    
-    
+        int* ptr { nullptr };   // note: ptr is still an integer pointer, just set to a null value
+        Arrays decay into pointers
+
+        int* ptr1{new int(5)};
+        int* ptr2{new int{6}};
+        delete ptr1; 
+
+        Deleting memory does not mean deleting variable. 
+
+        Dangling pointers 
+        Memory leak 
+
+        Function pointers 
+            int* x;
+            int (*fcn)(); // function pointer
+            int (*fcn)(){&foo}; // function pointer pointing to foo 
+
+            Calling a function using function pointer 
+                (*fcn)(5);  // Explicit dereference
+                fcn(5);     // Implicit dereference
+
+34. References 
+35. Iterators               -   An object that can iterate over a container class 
+        Operator*           -   Dereference the operator
+        Operator++          -   Move iterator to next element in the container. 
+        Operator--          -   Move iterator to previous element in the container. 
+        Operator==          -   Comparison operator 
+        Operator!=          -   
+        Operator=           -   Assign the iterator a new position
+
+        begin()             -   returns an iterator to the beginning of the container (beginning)
+        end()               -   returns an iterator to the element just past the end of the container (end+1)
+        cbegin()            -   returns a const iterator(read only) to the beginning of the container (beginning)
+        cend()              -   returns a const iterator(read only) to the element just past the end of the container (end+1)
+
+                                hence use -         it < v.end() 
+
+        container::iterator         -   read/write iterator 
+        container::const_iterator   -   read only iterator 
+
+36. Functors 
+37. I/O
+        istream             -   input streams       extraction operator >>
+        ostream             -   output streams      insertion operator  <<
+        iostream            -   both 
+        standard stream 
+            cin             -   istream_withassign
+            cout            -   ostream_withassign
+            cerr            -   ostream_withassign (unbuffered output)
+            clog            -   ostream_withassign (buffered output) 
+        stringstream 
+
+        Input 
+            std::cin retains residual values
+                char - remaining values after 1st char
+                std::string - remaining values after whitespace                                                                    
+                std::getline(std::cin >> std::ws, name); // read a full line of text into name
+        Output
+            std::cout
+                Precision 
+                    Generally 6 digits of precision
+                    std::cout << std::setprecision(16); // show 16 digits of precision
+                Escape sequence 
+                    \n                  -   New line
+                    \t                  -   Tab
+                    std::endl           -   New line + flushing buffer 
+                Comparison with printf() 
+
+38. Exceptions 
+        Try
+        Catch
+        Throw
+38. Assert
+        #include <cassert> // for assert()
+        static_assert(sizeof(int) == 4, "int must be 4 bytes");
+        A static_assert is an assertion that is checked at compile-time rather than at runtime
+39. Logger
+40. Refactoring  
+41. Containers
+        Types - 
+                Sequence containers     -   Data structure used to store objects in a linear manner 
+                        
+                        Array       -   Static contiguous array 
+                        
+                        Vector      -   Dynamic contiguous array
+                                        #include <vector> 
+                                        std::vector<int> v = {1,2,3,4};
+
+                        Forward_list -  Singly linked list
+
+                        List        -   Doubly linked list 
+                                        #include <list> 
+                                        std::list<int> l = {1,2,3,4};
+
+                        Deque       -   Double ended queue, elements can be added to the front or back of the queue 
+                        
+                        String? 
+                
+                Container adapters  -   Wrappers around containers (e.g - vectors, deque, list)
+
+                        Stack       -   LIFO. Last In First Out. Elements are inserted and removed from the end of the container. 
+
+                        Queue       -   FIFO. First In First Out. Elements are inserted to the back and removed from the front. 
+
+                        Priority queue - Priority queue with constant time lookup 
+
+                Associative containers - Sorted data structures with fast lookup using keys. 
+                                        
+                        Set         -   Unique elements only, duplicate elements disallowed. Elements are sorted according to their values.
+                                        #include <set> 
+
+                        Map         -   Each element has a key/value pair. Key is used for sorting and indexing, must be unique. 
+
+                        Multiset    -   Duplicated elements are allowed. 
+
+                        Multimap    -   
+
+                Unordered Associative containers - Unsorted data structures that can be accessed using hash 
+
+                        Unordered set - 
+                        Unordered map -
+                        Unordered multiset - 
+                        Unordered multimap - 
+
+        Container functions - 
+
+                1. 
+        
+
+                              
+42. Library functions
+        strings -   
+                    capacity()
+                    empty()
+                    length()
+                    size()
+                    max_size()
+                    reserve()
+                    []
+                    at()
+                    =
+                    assign()
+                    +=
+                    append()
+                    push_back()
+                    insert()
+                    clear()
+                    replace()
+                    resize()
+                    swap()
+                    >>
+                    getline()
+                    << 
+                    copy()
+                    ==
+                    !=
+                    compare()
+                    +
+                    substr()
+                    find()
+                    find_first_of()
+                    
+                
+
+        vectors -   
+                    []
+                    at()
+                    begin()
+                    end()
+
+                    insert 
+        
+        std::partition 
+        std::partition_copy() 
+        std::pair   -   v.first()
+                        v.second()
+        std::min_element(v.begin(),v.end())
+        std::max_element()
+        std::find()             -   auto it {std::find(v.begin(),v.end(),value)}
+        std::insert()           -   
+        std::sort 
+
     Null statement  -    Don't do anything 
-
 
 // return true if the difference between a and b is within epsilon percent of the larger of a and b
 bool approximatelyEqual(double a, double b, double epsilon)
@@ -351,11 +695,9 @@ bool approximatelyEqual(double a, double b, double epsilon)
     return (std::abs(a - b) <= (std::max(std::abs(a), std::abs(b)) * epsilon));
 }
 
-Short circuit evaluation 
+
 
 De Morgan's Law
-
-Name hiding, shadowing of variables 
 
 double getGravity() // this function can be exported to other files to access the global outside of this file
 {
@@ -372,35 +714,7 @@ int generateID()
 using std::cout;        //  cout should resolve to std::cout 
 using namespace std;
 
-Switch-case executes till break is encountered. 
-[[fallthrough]];        // to let the reader know that fallthrough is intentional
-
-Static member functions can be used even without objects 
-
-Switch-case works with -
-    int         -   directly
-    char        -   directly
-    string      -   indirectly using stoi 
-Examples of switch -
-
-void printMath(int x, int y, char ch)
-{
-    switch (ch)
-    {
-    case '+':
-        std::cout << x << " + " << y << " = " << x + y << '\n';
-        break; // don't fall-through to next case
-    case '-':
-        std::cout << x << " - " << y << " = " << x - y << '\n';
-        break; // don't fall-through to next case
-    }
-}
-
 std::cerr << "Error";
-
-#include <cassert> // for assert()
-static_assert(sizeof(int) == 4, "int must be 4 bytes");
-A static_assert is an assertion that is checked at compile-time rather than at runtime
 
     C++17 - 
     #include <iterator>         // for std::size

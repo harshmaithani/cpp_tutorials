@@ -76,8 +76,8 @@ class Shape
     public:
         double  area1();                            // Normal function
         virtual double area();                      // Virtual function.        Can exist in derived class.
-        virtual double perimeter() = 0 ;            // Pure virtual function.   Must exist in derived class.
-        virtual double perimeter2() const = 0 ;     // Pure virtual function.   Must exist in derived class.
+        virtual double perimeter() = 0 ;            // Pure virtual function.   Must be redefined in derived class.
+        virtual double perimeter2() const = 0 ;     // Pure virtual function.   Must be redefined in in derived class.
         int friendofA();
 };
 

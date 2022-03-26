@@ -27,6 +27,7 @@
 #include <typeinfo>         // std::cout << typeid(&x).name() << '\n';
 
 #include <cstdlib>          // for std::exit()
+#include <chrono>           // for std::chrono functions
 
 int main(int argc,char** argv)
 {

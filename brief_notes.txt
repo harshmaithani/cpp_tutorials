@@ -1,55 +1,87 @@
 Important terms
 
-1.  Namespaces
-2.  Preprocessor directives 
-3.  Protected keywords 
-4.  Identifiers
-5.  Literals
-6.  Variables
+1.  C++ program 
+2.  Namespaces
+3.  Preprocessor directives 
+4.  Protected keywords 
+5.  Main()  
+        Status codes 
+        SIGINT
+        void main()
+        int main()
+        int main(int argc,char* argv[])
+6.  Identifiers
+7.  Literals
+8.  Variables
         Global
         local
         variable shadowing(name hiding)
-7.  Constants
-8.  Operators
+9.  Constants
+        consts 
+        constexpr
+        volatile
+10. Operators
         Precedence list
         Operator overloading
-9.  Expressions
-10  Types
+11. Expressions
+12. Types
         Fundamental data Types
         object size
         fixed width integers 
-11. Alias
-12. Deduction 
-13. Typedef
-    Assignment
-14.  Scope, duration and linkage 
-15. Declarations 
-16. Definitions 
-17. Initializations
+13. Type Alias
+14. Type Deduction (Datatype)
+15. Type Conversions (Datatype)
+        Implicit conversions 
+            Promotions 
+            Numeric conversions
+            Arithmetic conversions
+        Explicit conversions 
+        C   
+            Functional type
+        C++ 
+            Dynamic cast 
+            Static cast 
+            Reinterpret cast
+            Const cast
+16. Scope
+17. Duration 
+18. Linkage
+19. Storage class specifiers
+        auto
+        register
+        static 
+        extern 
+        mutable 
+20. Declarations 
+21. Definitions 
+22. Initializations
         Copy
         Direct
         Uniform / List / Brace 
-
-18. Memory allocation
+23. Memory allocation
         new
-        delete 
-19. Conditionals
+        delete
+24. Operations  
+25. Conditionals
         If
         Switch
         break 
         continue  
-20. Loops
+26. Loops
         For 
         While 
-21. OOP 
+27. Object Oriented Programming (OOP)
     Class - object 
         Abstraction
         Inheritance
         Polymorphism
-            Compile time vs Run time 
+            Compile time
+                Function overloading 
+                Operator overloading
+            Run time 
+                Virtual functions
         Encapsulation
-
-22. Functions
+28. Functions
         Forward declarations
         Function definition
             Parameters
@@ -72,34 +104,36 @@ Important terms
             Arguments
         Function overloading
         Function pointers 
-        Lambdas 
-
-23. Classes 
+        Lambdas (Lambda functions)
+29. Classes 
         Definition
             Class attributes    /   Member variables    /   Fields
             Class behaviour     /   Member functions    /   Methods
-            Constructors 
+            Constructors
+                Default Constructors
+                Copy Constructors
+                        Default copy Constructors
+                        Shallow copying 
+                        Deep copying  
             Destructor
             Access specifiers 
             Accessor functions  /   Getters
             Mutator functions   /   Setters 
 
         Object Instantiation 
-        this pointer 
+        The hidden *this pointer 
         Static member functions 
         Virtual functions
         Pure virtual functions 
         Friend class 
         Operator overloading
-    
-24. Structs 
-
-25. Templates 
+30. Structs 
+31. Templates 
         Function templates 
         Class templates 
-        Template initialization 
-
-26. Pointers
+        Template initialization
+32. Vectors  
+33. Pointers
         Raw pointers 
         Void pointers
         Null pointers 
@@ -113,43 +147,24 @@ Important terms
         Deleting
         Memory leak
         Dangling pointers  
-
-27. References 
-
-28. Iterators 
-
-29. Conversions
-        Implicit conversions 
-            Promotions 
-            Numeric conversions
-            Arithmetic conversions
-        Explicit conversions 
-        C   
-            Functional type
-        C++ 
-            Dynamic cast 
-            Static cast 
-            Reinterpret cast
-            Const cast
-
-30. Refactoring
-31. Logger 
-32. std::cout 
-        Escape sequences 
-        set precision 
-        printf 
-33. Status codes 
-34. Exceptions 
+34. References 
+35. Iterators 
+36. Functors 
+37. I/O 
+38. Exceptions 
         Try
         Catch
         Throw 
-35. I/O
+39. Assert 
+40. Logger
+41. Refactoring 
 
+--------------------------------------------------------------------------------------
 Some Definitions
 
 1.  const int a{10};
-2.  const int* b{&a};       // b is a pointer to a const int. value can change
-3.  const int* c{&a};       // c is a const pointer to a const int. address can't change.
+2.  const int* b{&a};             // b is a pointer to a const int. value can change
+3.  const int* const c{&a};       // c is a const pointer to a const int. address can't change.
 
 4.  int x(int);             // function forward declaration 
     int x(int m){}          // function defintion
@@ -166,6 +181,7 @@ Some Definitions
           int x (int &m){};         // pass by reference 
           int x (int* m){};         // pass by address
           int x (const int& m){};   // const ref 
+          int x const(int m){};     // const function 
     const int x (int m){};          // return const int 
     const int* x (int m){};         // return pointer to const int 
     const int x const (int m){};    // const member function 
